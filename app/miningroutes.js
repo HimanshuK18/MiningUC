@@ -1,7 +1,6 @@
 // app/routes.js
 var mongojs = require('mongojs');
 var dbUrl = require("../config/db");
-var multer = require('multer');
 var fs = require('fs');
 var path = require('path');
 var mime = require('mime');
@@ -314,29 +313,3 @@ function ensureAuthorized(req, res, next) {
         res.send(403);
     }
 }
-function urlBase64Decode(str) {
-    var output = str.replace('-', '+').replace('_', '/');
-    switch (output.length % 4) {
-        case 0:
-            break;
-        case 2:
-            output += '==';
-            break;
-        case 3:
-            output += '=';
-            break;
-        default:
-            throw 'Illegal base64url string!';
-    }
-    return window.atob(output);
-}
-
-var storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, 'uploads/conversion')
-    },
-    filename: function (req, file, cb) {
-        cb(null, file.originalname)
-    }
-})
-var uploadfile = multer({ storage: storage });
