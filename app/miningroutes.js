@@ -3,7 +3,6 @@ var mongojs = require('mongojs');
 var dbUrl = require("../config/db");
 var fs = require('fs');
 var path = require('path');
-var mime = require('mime');
 var user;
 
 module.exports = function (app) {
