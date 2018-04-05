@@ -1,0 +1,149 @@
+<div class="container" ng-controller="ExcavationController">
+    <div id='divtabled' class="col-md-12" style="width:77%;overflow-x:auto;height:445px;position: absolute;margin-top:12%;margin-left:19%;">
+        <table class="table table-responsive" style="overflow-x:auto;">
+            <thead>
+                <tr style="border-top:2px solid rgb(77, 76, 76);">
+                    <th class="col-md-2 tableheader">
+                        <span>Contract ID</span>
+                    </th>
+                    <th class="col-md-2 tableheader">
+                        <span>Company</span>
+                    </th>
+                    <th class="col-md-4 tableheader">
+                        <span>Contract Tranaction</span>
+                    </th>
+                    <th class="col-md-2 tableheader">
+                        <span>Contract Status</span>
+                    </th>
+                    <th class="col-md-2 tableheader" colspan="2">
+                        <span>Action</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="Contract in ContractsList" style="cursor:pointer;" class="tablerow">
+                    <td class="tablecell">{{Contract.contractdata.cid}}</td>
+                    <td class="tablecell">{{Contract.CompanyName}}</td>
+                    <td class="tablecell">{{Contract.TranactionCode}}</td>
+                    <td class="tablecell">{{Contract.contractdata.cid}}</td>
+                    <td class="tablecell">
+                        <button class="btn buttonm" ng-click="CreateReportExcavation(Contract._id)" style="margin-top: 10px;"
+                            ng-disabled="2 >= Contract.statusvalue">Report</button>
+                    </td>
+                    <td class="tablecell">
+                        <button class="btn buttonm" ng-click="CreateExcavationData(Contract._id)" style="margin-top: 10px;" ng-disabled="Contract.statusvalue != 2">Create</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+    <div id='divtableddata' class="col-md-12" style="width:77%;overflow-x:auto;height:445px;position: absolute;margin-top:12%;margin-left:19%;">
+        <div class="col-md-12" style="width:100%;border-bottom:1px solid grey;">
+            <span style="color:rgba(255, 255, 255, 0.582);font-size:20px;font-weight:bold;">Enter Excavation Data</span>
+        </div>
+        <div class="col-md-12" style="width:100%;border-top:1px solid grey;margin-top:3px;">
+            <form style="margin-top:10px;" name='Excavationform'>
+                <table class="col-lg-12 col-md-12" id="UserInputExcavation" style="border-collapse: separate;border-spacing: 10px 3px;width:100%;">
+                    <tr>
+                        <td class="col-lg-6 col-md-6 labelstyle">
+                            <span class="labelstylespan">Mineral </span>
+                        </td>
+                        <td class="col-lg-6 col-md-6 labelstyle">
+                            <span class="labelstylespan" style="font-weight:bold;">Zinc</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-lg-6 col-md-6 labelstyle">
+                            <span class="labelstylespan">Face ID</span>
+                        </td>
+                        <td class="col-lg-6 col-md-6 labelstyle">
+                            <input class="textboxstyle" name="faceid" type="text" ng-model="ExcavationData.faceid" id="faceid" required />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-lg-6 col-md-6 labelstyle">
+                            <span class="labelstylespan">Ore Grade %</span>
+                        </td>
+                        <td class="col-lg-6 col-md-6 labelstyle">
+                            <input ng-blur="GetGrade()" class="textboxstyle" name="oregrade" type="number" ng-model="ExcavationData.oregrade" id="oregrade" required />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-lg-6 col-md-6 col-lg-6 col-md-6 labelstyle">
+                            <span class="labelstylespan">Ore Grade Type</span>
+                        </td>
+                        <td class="col-lg-6 col-md-6 labelstyle">
+                            <input class="textboxstyle" name="oregradetype" type="text" ng-model="ExcavationData.oregradetype" id="oregradetype" required
+                                disabled />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-lg-6 col-md-6 col-lg-6 col-md-6 labelstyle">
+                            <span class="labelstylespan">Tonnage (Excavation)</span>
+                        </td>
+                        <td class="col-lg-6 col-md-6 labelstyle">
+                            <input class="textboxstyle" name="tonnage " type="number" ng-model="ExcavationData.tonnage" id="tonnage" required />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-lg-6 col-md-6 col-lg-6 col-md-6 labelstyle">
+                            <span class="labelstylespan">Waste</span>
+                        </td>
+                        <td class="col-lg-6 col-md-6 labelstyle">
+                            <input class="textboxstyle" name="waste " type="number" ng-model="ExcavationData.waste" id="waste" required />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-lg-6 col-md-6 col-lg-6 col-md-6 labelstyle">
+                            <span class="labelstylespan">Dilution</span>
+                        </td>
+                        <td class="col-lg-6 col-md-6 labelstyle">
+                            <input class="textboxstyle" name="dilution " type="number" ng-model="ExcavationData.dilution" id="dilution" required />
+                        </td>
+                    </tr>
+                </table>
+                <div style="width:50%;float: left;margin-bottom:20px;">
+                    <button class="btn buttonm" ng-click="SaveExcavationData(Excavationform)" style="margin-top: 20px;margin-left:50%;">Save</button>
+                </div>
+                <div style="width:50%;float: right;">
+                    <button class="btn buttonm" ng-click="CancelExcavationData()" style="margin-top:20px;" formnovalidate>Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="divtablereport" class="col-md-12" style="width:77%;overflow-x:auto;height:445px;position: absolute;margin-top:12%;margin-left:19%;">
+        <div style="color:#FFD801;opacity:.9;font-weight:bold;font-size:17px;margin-left:38%;"> The Dashboard</div>
+        <table class="table table-responsive" style="margin-left:20%;width:57%;margin-top:15px;">
+            <thead>
+                <tr style="border-top:2px solid rgb(77, 76, 76);">
+                    <th class="col-md-2 tableheader">
+                        <span>S No.</span>
+                    </th>
+                    <th class="col-md-7 tableheader">
+                        <span>Condition</span>
+                    </th>
+                    <th class="col-md-3 tableheader">
+                        <span>Outcome</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="cursor:pointer;background-color:rgba(250, 250, 0, 0.24);" class="tablerow" ng-repeat="report in ReportDataExcavation">
+                    <td style="padding:4px;font-weight:bold;text-align:center;">{{$index + 1}}</td>
+                    <td class="tablecell" style="padding:4px;font-weight:bold;text-align:left;">
+                        <span>{{report.label}}</span>
+                    </td>
+                    <td style="padding:4px;text-align: center;">
+                        <i ng-show="report.output" class="fa fa-check-square fa-2x text-center" aria-hidden="true" ng-style="{ color: report.output == true ? 'green' : 'red' }"></i>
+                        <i ng-show="!report.output" class="fa fa-window-close fa-2x text-center" aria-hidden="true" ng-style="{ color: report.output == true ? 'green' : 'red' }"></i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div>
+            <button class="btn buttonm" ng-click="CancelExcavationReport()" style="margin-top:20px;margin-left:40%;" formnovalidate>Close</button>
+        </div>
+    </div>
+</div>
