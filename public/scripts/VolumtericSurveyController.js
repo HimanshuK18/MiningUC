@@ -2,7 +2,7 @@
 'use strict';
 angular.module('MiningUseCase')
     .controller('VolumtericSurveyController', ['$scope', '$http', '$location', '$compile', '$rootScope', function ($scope, $http, $location, $compile, $rootScope) {
-        $('#toplabel').text('Waste Dump & its Volumteric Survey Data');
+        $('#toplabel').text('Waste Dump Data');
         var refreshVolumetricsurvey = function () {
             $('#divtableddata').hide();
             $('#divtablereport').hide();
@@ -38,12 +38,12 @@ angular.module('MiningUseCase')
             ShowWait(true);
             $http.get($scope.baseurl + '/GetReport/Volumetricsurvey/' + id + '/' + $scope.uid).then(function (response) {
                 var lable1 = 'Mineral Must be ' + response.data.Miniral;
-                var label2 = 'Tonnage should be minimum ' + response.data.Tonnage + ' kg Or per blast';
-                var label3 = 'Dilution should be in Range ± 1% of ' + response.data.Dilution;
+                var label2 = 'Ore with waste? ' ;
+                var label3 = 'Strip ratio maintained? ';
                 $scope.ReportDataVolumetricsurvey = {
                     "r1": { "label": lable1, "output": response.data.MiniralReport },
-                    "r2": { "label": label2, "output": response.data.TonnageReport },
-                    "r3": { "label": label3, "output": response.data.DilutionReport }
+                    "r2": { "label": label2, "output": response.data.WasteReport },
+                    "r3": { "label": label3, "output": response.data.StripRatio }
                 };
                 ShowWait(false);
                 $('#divtabled').hide();

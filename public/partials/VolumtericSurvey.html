@@ -65,13 +65,21 @@
                             </td>
                         </tr>    
                         <tr>
+                        <td class="col-lg-6 col-md-6 col-lg-6 col-md-6 labelstyle">
+                            <span class="labelstylespan">Date</span>
+                        </td>
+                        <td class="col-lg-6 col-md-6 labelstyle">
+                                <input class="textboxstyle" name="date" type="date" ng-model="LoadingData.date" id="date" required />
+                        </td>
+                        </tr>  
+                      <!--  <tr>
                             <td class="col-lg-6 col-md-6 labelstyle">
                                 <span class="labelstylespan">Tonnage (per blast, Volumetric Survey)</span>
                             </td>
                             <td class="col-lg-6 col-md-6 labelstyle">
                      <input class="textboxstyle" name="tonnage" type="number" ng-model="VolumetricsurveyData.tonnage" id="tonnage" required />
                             </td>
-                        </tr>        
+                        </tr>     -->   
                     </table>
                     <div style="width:50%;float: left;margin-bottom:20px;">
                             <button class="btn buttonm" ng-click="SaveVolumetricsurveyData(volumetricsurveyform)" style="margin-top: 20px;margin-left:50%;">Save</button>
