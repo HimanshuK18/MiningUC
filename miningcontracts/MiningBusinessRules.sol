@@ -15,8 +15,10 @@ bool public boolWasteExcavation;
 bool public boolTonnageLoading; 
 bool public boolTripsLoading;
 string public strWasteDump;
+bool public boolWasteDump;//added
 bool public boolNoWaste;
 bool public boolOreWithWaste;
+bool public boolstripratio;
 bool public boolStockpileStockpileOreGrade;
 bool public boolStockpileDilution;
 bool public boolStockpileMoisture;
@@ -51,15 +53,17 @@ function setLoadingReport(int64 TonnageContract, int64 TonnageLoading,int64 Trip
         boolTonnageLoading = TonnageContract >= TonnageLoading;
         boolTripsLoading =  TripsLoading >= TripsContract ;
     }
-function setWasteDumpReport(int64 Waste, int64 TonnageWaste)
+function setWasteDumpReport(int64 Waste, int64 Tonnage)
     {
-            if (boolWasteExcavation)
+            /*if (boolWasteExcavation)
             { 
                 if (Waste ==0 && TonnageWaste == 0)
                 {strWasteDump = "Face is only ore.";}
                 else
                 {strWasteDump = "Face with ore & waste";}
-            }
+            }*/
+            boolWasteDump = Waste > 0;
+            boolstripratio = Waste >= Tonnage*7;
     }
 
     function setStockpileSamplingReport(int64 OreGradeContrat, int64 OreGradeContractor, int64 DilutionDrilling, int64 DilutionContractor,int64 MoisterDrilling, int64 MoistureContractor,int64 StockpileTonnage,int64 ExcavationTonnage,int64 OreGradeDrilling,int64 OreGradeStockpileSampling)
